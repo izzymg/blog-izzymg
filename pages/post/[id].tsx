@@ -1,4 +1,5 @@
-import { GetStaticPathsResult, GetStaticProps, GetStaticPropsContext, NextPage } from "next";
+import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
+import ReactMarkdown from "react-markdown";
 
 interface PostProps {
     post: Post
@@ -8,6 +9,10 @@ const Post: NextPage<PostProps> = (props) => {
 
     const { post } = props
 
+    const transformImageUri = (src: string, alt: string, title: string | null): string => {
+        return `${process.env.API_URL}${src}`
+    }
+
     return (
         <main>
             <header>
@@ -15,9 +20,9 @@ const Post: NextPage<PostProps> = (props) => {
                 <span>{post.date}</span>
             </header>
 
-            <article>
+            <ReactMarkdown transformImageUri={transformImageUri}>
                 {post.content}
-            </article>
+            </ReactMarkdown>
         </main>
     )
 }
