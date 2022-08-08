@@ -39,3 +39,9 @@
   line-height: 1.5;
   font-size: 1.5rem;
 }
+
+.postGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1em;
+}

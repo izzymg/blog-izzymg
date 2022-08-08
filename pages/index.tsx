@@ -53,10 +53,9 @@ export const getStaticProps: GetStaticProps = async ctx => {
     )
   }
 
-  console.log(posts)
-
+  // reverse to display homepage posts newest -> oldest
   return {
-    props: { posts }, 
+    props: { posts: posts.reverse() }, 
   }
 }
 
