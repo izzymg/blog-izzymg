@@ -24,7 +24,7 @@ export const openMd = async (slug: string): Promise<Post> => {
         })
 
         await handle.close()
-        return { ...meta, slug, content: buffer.slice(buffer.lastIndexOf('-') + 1) }
+        return { ...meta, slug, content: buffer.slice(buffer.lastIndexOf('---\n')) }
 
     } catch (e) {
         throw `failed to open markdown post: ${e}`
