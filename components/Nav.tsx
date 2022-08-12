@@ -1,9 +1,10 @@
+import Link from "next/link"
 import styles from "../styles/Nav.module.css"
 
 const Nav = () => {
     return (
         <nav className={styles.nav}>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
             <a href="https://izzymg.dev">Portfolio</a>
         </nav>
     )
