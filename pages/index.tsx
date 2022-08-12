@@ -1,8 +1,9 @@
-import type { NextPage, GetStaticProps } from 'next'
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import type { NextPage, GetStaticProps } from "next"
+import Head from "next/head"
+import styles from "../styles/Home.module.css"
 
 import PostCard from "../components/PostCard"
+import { openAllMd, Post } from "../lib";
 
 interface HomeProps {
   posts: Post[]
@@ -41,17 +42,7 @@ const Home: NextPage<HomeProps> = (props) => {
 
 export const getStaticProps: GetStaticProps = async ctx => {
 
-  const res = await fetch(`${process.env.API_URL}/posts`)
-  const json = await res.json()
-  const data = json
-
-  const posts: Post[] = []
-
-  for(const entry of data) {
-    posts.push(
-      entry as Post
-    )
-  }
+  const posts = await openAllMd()
 
   // reverse to display homepage posts newest -> oldest
   return {

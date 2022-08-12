@@ -1,6 +1,11 @@
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import ReactMarkdown from "react-markdown";
 
+import styles from "../../styles/[id].module.css"
+
+import { openAllMd, openMd, Post } from "../../lib";
+import Head from "next/head";
+
 interface PostProps {
     post: Post
 }
@@ -13,29 +18,38 @@ const Post: NextPage<PostProps> = (props) => {
         return `${process.env.API_URL}${src}`
     }
 
-    return (
-        <main>
-            <header>
-                <h1>{post.title}</h1>
-                <span>{post.date}</span>
-            </header>
+    const metaTitle = `${post.title} - izzymg.deblog`
 
-            <ReactMarkdown transformImageUri={transformImageUri}>
-                {post.content}
-            </ReactMarkdown>
-        </main>
+    return (
+        <div className={styles.container}>
+            <Head>
+                <title>{metaTitle}</title>
+                <meta name="description" content={post.desc} />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <main className={styles.main}>
+                <header className={styles.header}>
+                    <h1 className={styles.title}>{post.title}</h1>
+                    <p className={styles.desc}>{post.desc}</p>
+                </header>
+                <article className={styles.article}>
+                    <span className={styles.date}>{post.date}</span>
+                    <ReactMarkdown transformImageUri={transformImageUri}>
+                        {post.content}
+                    </ReactMarkdown>
+                </article>
+            </main>
+        </div>
     )
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
 
-    if(!params) {
+    if (!params) {
         throw 404
     }
 
-    const res = await fetch(`${process.env.API_URL}/posts/?slug=${params["id"]}`)
-    const data = await res.json()
-    const post: Post = data["0"]
+    const post = await openMd(params["id"] as string)
 
     return {
         props: { post },
@@ -44,18 +58,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
 
 export async function getStaticPaths() {
 
-    const res = await fetch(`${process.env.API_URL}/posts`)
-    const json = await res.json()
-    const data = json
-  
-    const posts: Post[] = []
-  
-    for(const entry of data) {
-      posts.push(
-        entry as Post
-      )
-    }
-  
+    const posts = await openAllMd()
 
     return {
         paths: posts.map(post => ({ params: { id: post.slug } })),

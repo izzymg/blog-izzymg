@@ -1,0 +1,20 @@
+.main {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.article {
+    width: min(750px, 95vw);
+
+    font-size: 16px;
+}
+
+.article p::first-letter {
+    font-size: large;
+    font-weight: bold;
+}
+
+.date {
+    border-top: 2px solid hsl(0, 0%, 80%);
+}

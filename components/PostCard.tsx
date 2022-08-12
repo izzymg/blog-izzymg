@@ -1,4 +1,4 @@
-import styles from '../styles/PostCard.module.css'
+import styles from "../styles/PostCard.module.css"
 
 const PostCard = ({ title, slug, date, desc, }: Post) => {
 
