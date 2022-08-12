@@ -3,6 +3,7 @@ import Head from "next/head"
 import styles from "../styles/Home.module.css"
 
 import PostCard from "../components/PostCard"
+import Nav from "../components/Nav"
 import { openAllMd, Post } from "../lib";
 
 interface HomeProps {
@@ -17,6 +18,8 @@ const Home: NextPage<HomeProps> = (props) => {
 
   return (
     <div className={styles.container}>
+
+      <Nav />
       <Head>
         <title>izzymg.devblog</title>
         <meta name="description" content="Izzy MG's writings" />

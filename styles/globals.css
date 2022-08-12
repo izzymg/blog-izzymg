@@ -9,6 +9,8 @@
   --card-bg: hsl(0, 0%, 98%);
   --card-border: hsl(0, 0%, 92%);
   --card-border-focus: hsl(0, 0%, 40%);
+
+  scroll-behavior: smooth;
 }
 
 html,

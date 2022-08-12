@@ -1,6 +1,8 @@
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import ReactMarkdown from "react-markdown";
 
+import Nav from "../../components/Nav"
+
 import styles from "../../styles/[id].module.css"
 
 import { openAllMd, openMd, Post } from "../../lib";
@@ -22,6 +24,8 @@ const Post: NextPage<PostProps> = (props) => {
 
     return (
         <div className={styles.container}>
+            <a id="top"></a>
+            <Nav />
             <Head>
                 <title>{metaTitle}</title>
                 <meta name="description" content={post.desc} />
@@ -37,6 +41,7 @@ const Post: NextPage<PostProps> = (props) => {
                     <ReactMarkdown transformImageUri={transformImageUri}>
                         {post.content}
                     </ReactMarkdown>
+                    <a href="#top">Back to top</a>
                 </article>
             </main>
         </div>

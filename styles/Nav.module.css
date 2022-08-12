@@ -1,0 +1,21 @@
+.nav {
+    display: flex;
+    padding: 1em 0.5em;
+    justify-content: center;
+    gap: 1em;
+
+    margin-bottom: 2em;
+
+    background: var(--cta-bg);
+}
+
+.nav a {
+    color: var(--cta-fg);
+    font-weight: bold;
+
+    transition: color 150ms ease-out;
+}
+
+.nav a:hover {
+    color: var(--link-fg);
+}
