@@ -1,3 +1,4 @@
+import { Post } from "../lib"
 import styles from "../styles/PostCard.module.css"
 
 const PostCard = ({ title, slug, date, desc, }: Post) => {
